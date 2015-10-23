@@ -1,7 +1,7 @@
 .zachary {
     height: 70px;
     font-family: 'Arial Black', 'Arial Bold', Gadget, sans-serif;
-    font-size: 30px;
+    font-size: 20px;
     font-style: normal;
     font-variant: normal;
     font-weight: 500;
@@ -31,6 +31,8 @@ a {
 	color: red;
 }
 
+
+
 body {
 	font-family: Courier;
 	font-size: 20px;
@@ -39,7 +41,7 @@ body {
 
 li {
 	list-style-type: none;
-	line-height: 70px;
+	line-height: 50px;
 	width: 100%;
     
 }
@@ -78,10 +80,13 @@ li a {
     padding-right: 100px;
     font-family: courier;
     font-size: 15px;
+    margin-bottom: 50px;
+    border-bottom: 5px;
+    
 }
 .title {
     
-    text-align: center;
+    text-align: justify;
     
 }
 
@@ -141,5 +146,22 @@ button {
     margin-left: .5em;
 }
 .testit {
+    text-align: justify;
+}
+.banner {
+    
+    border: 2px solid;
+    border-radius: 25px;
+    background-color: gray;
+    
+}
+.para{
+    text-align: left;
+    padding-top: 20px;
+}
+#hateButton {
     text-align: center;
+}
+.count {
+    background-color: green;
 }

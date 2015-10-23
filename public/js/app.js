@@ -3,47 +3,27 @@ var BlogList = React.createClass({
       
       var blogData = this.props.data.map(function(blog){
         return <div className="blog">
-                  <h2 className="title">{blog.title}</h2>
-                  <h3 className="title">By {blog.author}</h3>
-                  <p> {blog.body}</p>
+                  <h2 className="title banner">{blog.title}</h2>
+                  <h3 className="title">By {blog.author} &middot; {blog.date}</h3>
+                  
+                  <p className="para"> {blog.body}</p>
+                  
                 </div>
       });
 
-        return (
+      return (
         <div>
-          
-            
-            <ul>
-              {blogData}
-            </ul>
-            <CommentForm onCommentSubmit={this.handleCommentSubmit} />
+          {blogData}
         </div>
           );
     }
 });
 
-var CommentForm = React.createClass({
-  handleSubmit: function(e) {
-    e.preventDefault();
-    var author = this.refs.author.value.trim();
-    var text = this.refs.body.value.trim();
-    if (!text || !author) {
-      return;
-    }
-    this.props.onCommentSubmit({author: author, body: body});
-    this.refs.author.value = '';
-    this.refs.body.value = '';
-  },
-  render: function() {
-    return (
-      <form className="commentForm" onSubmit={this.handleSubmit}>
-        <input type="text" placeholder="Your name" ref="author" />
-        <input type="text" placeholder="Say something..." ref="body" />
-        <input type="submit" value="Post" />
-      </form>
-    );
-  }
-});
+// +++++++++++++++++++++++++++++++++++
+// +++++++++++++++++++++++++++++++++++
+
+
+
 var BlogBox = React.createClass({
 
     getInitialState: function(){
@@ -72,11 +52,9 @@ var BlogBox = React.createClass({
   
     render: function() {
         return (
-        <div className="testit">
-            <ul>
+        
               <BlogList data={this.state.data}/>
-            </ul>
-        </div>
+        
           );
     }
 });

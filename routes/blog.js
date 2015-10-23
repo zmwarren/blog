@@ -33,7 +33,6 @@ router.route('/')
   })
 
   .post(function(req, res){
-    
 
     mongoose.model('Blog').create({
       title: req.body.title,
