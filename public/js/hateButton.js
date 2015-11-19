@@ -18,7 +18,7 @@ var HateButton = React.createClass({
       </button>
       <div className="btn btn-primary">{count} visitors hate this blog Poast!</div>
       </div>
-      );
+    );
   }
 });
 

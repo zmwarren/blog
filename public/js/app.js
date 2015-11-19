@@ -1,28 +1,21 @@
 var BlogList = React.createClass({
-    render: function() {
-      
-      var blogData = this.props.data.map(function(blog){
-        return <div className="blog">
-                  <h2 className="title banner">{blog.title}</h2>
-                  <h3 className="title">By {blog.author} &middot; {blog.date}</h3>
-                  
-                  <p className="para"> {blog.body}</p>
-                  
-                </div>
+   render: function() { 
+      var blogData = this.props.data.map(function(blog){ 
+         return (
+         <div className="blog">
+           <h2 className="title banner" id="something">{blog.title}</h2>
+           <h3 className="title">By {blog.author} &middot; {blog.date}</h3>
+           <p className="para"> {blog.body}</p> 
+         </div>
+         );
       });
-
       return (
-        <div>
-          {blogData}
-        </div>
-          );
-    }
+         <div>
+            {blogData}
+         </div>
+     );
+   }
 });
-
-// +++++++++++++++++++++++++++++++++++
-// +++++++++++++++++++++++++++++++++++
-
-
 
 var BlogBox = React.createClass({
 
@@ -36,7 +29,7 @@ var BlogBox = React.createClass({
         dataType: 'json',
         cache: false,
         success: function(data) {
-          console.log("inside success")
+          // console.log(data);
           this.setState({data: data});
         }.bind(this),
         error: function(xhr, status, err) {
@@ -50,13 +43,11 @@ var BlogBox = React.createClass({
     this.loadBlogsFromServer();
   },
   
-    render: function() {
-        return (
-        
-              <BlogList data={this.state.data}/>
-        
-          );
-    }
+  render: function() {
+    return (
+      <BlogList data={this.state.data}/>
+    );
+  }
 });
 
 ReactDOM.render(<BlogBox url="/api/blog/"/>, document.getElementById('content'));

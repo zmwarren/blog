@@ -82,11 +82,12 @@ li a {
     font-size: 15px;
     margin-bottom: 50px;
     border-bottom: 5px;
+    text-align: center;
     
 }
 .title {
     
-    text-align: justify;
+    text-align: center;
     
 }
 
@@ -153,6 +154,7 @@ button {
     border: 2px solid;
     border-radius: 25px;
     background-color: gray;
+    text-align: center;
     
 }
 .para{
@@ -164,4 +166,11 @@ button {
 }
 .count {
     background-color: green;
+}
+#twitterIcon {
+    margin-left: 35px;
+}
+#linkedIcon {
+    margin-left: 20px;
+    margin-right: 20px;
 }
