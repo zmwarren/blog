@@ -12,6 +12,7 @@ var method = require('method-override');
 var passportLocal = require('passport-local');
 var bodyParser = require('body-parser');
 var db = require('./model/db');
+var comment = require('./model/comment');
 var Blog = require('./model/blog');
 var app = express();
 var mongoose = require('mongoose');
@@ -78,7 +79,7 @@ require('./routes/userRoutes.js')(app, passport);
 var blogRoutes = require('./routes/blogRoutes.js');
 var githubRoutes = require('./routes/githubRoutes.js');
 
-app.use('/api/blog', blogRoutes);
+app.use('/api/blogs', blogRoutes);
 app.use('/api/github', githubRoutes);
 
 
