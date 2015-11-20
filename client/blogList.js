@@ -105,13 +105,13 @@ var CommentForm = React.createClass({
       render: function() {
         return (
                  <div>
-                 <form>
-                  <div className="form-group" >
-                        <label>Leave a Comment</label>
+                 
+                 
+                        <h3>Leave a Commment</h3>
                         <textarea type="text" className="form-control" ref="body" placeholder="Say something nice..."/>
-                  </div>
+                  
                   <button onClick={this.handleCommentSubmit} type="submit" className="btn btn-default">Submit</button>
-                 </form>
+                 
                  </div>
               );
       }
@@ -132,7 +132,7 @@ var HateButton = React.createClass({
     var count = this.state.counter;
     return (
       <div className="row">
-      <button onClick={this.handleClick} className="btn glyphicon glyphicon-thumbs-down">  {count}</button>
+      <button onClick={this.handleClick} className="btn glyphicon glyphicon-thumbs-down"> {count}</button>
       </div>
     );
   }
@@ -153,7 +153,7 @@ var LoveButton = React.createClass({
     var count = this.state.counter;
     return (
       <div className="row">
-      <button onClick={this.handleClick} className="btn glyphicon glyphicon-thumbs-up">   {count}</button>
+      <button onClick={this.handleClick} className="btn glyphicon glyphicon-thumbs-up"> {count}</button>
       </div>
     );
   }
