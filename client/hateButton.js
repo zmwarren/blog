@@ -24,5 +24,5 @@ var HateButton = React.createClass({
   }
 });
 
-ReactDOM.render(<HateButton />, document.getElementById('hateButton'));
+// ReactDOM.render(<HateButton />, document.getElementById('hateButton'));
 module.exports = HateButton;

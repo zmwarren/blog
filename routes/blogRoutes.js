@@ -48,9 +48,7 @@ router.route('/')
         res.send("That's not a blog, son");
       }else {
         console.log(blog + " has been added to the database.");
-        // res.render('index.ejs');
         res.json(blog);
-        // res.render('index.ejs');
       }
     });
   });
@@ -102,13 +100,12 @@ router.route('/')
  .post(function(req,res){
    mongoose.model('Comment').create({
      body: req.body.body,
-     user: req.body.user
+     user: req.user
    }, function(err, comment){
      if(err)
        res.send(err)
      mongoose.model('Blog').findById({
        _id: req.params.id
-
      }, function(err, blog){
        if(err)
          res.send(err)

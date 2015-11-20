@@ -7,21 +7,28 @@ var BlogList = React.createClass({
    render: function() {
       var blogData = this.props.data.map(function(blog){
         var commentData = blog.comments.map(function(comment){
-                 return(    
+                 return(
+                 <div className="para" key={comment._id}>    
                      <div className="comment panel panel-default box">
                         <h4 className="panel-header">{comment._id} said...</h4>
                         <p className="panel-body">{comment.body}</p>
                         <h5 className="panel-footer">Posted on {comment.date}</h5>
                      </div>
+                  </div>
                 );
         });
         return (
-            <div className="blog">
+            <div className="blog" key={blog._id}>
               <h2 className="title banner" id="something">{blog.title}</h2>
               <h3 className="title">By {blog.author} &middot; {blog.date}</h3>
               <p className="para"> {blog.body}</p>
-              <CommentForm/>
-              <p className="para"> {commentData}</p>  
+              <div className="">                            
+                  <HateButton/>                                
+                  <LoveButton/>        
+              </div>
+              <CommentForm blogId={blog._id}/>
+              <h2 className="title">Comments</h2>
+              {commentData}
             </div>
         );   
       });
@@ -68,19 +75,21 @@ var BlogBox = React.createClass({
 var CommentForm = React.createClass({
 
    handleCommentSubmit: function(e) {
+   
+    var blogId = this.props.blogId;
       e.preventDefault();
       var body = ReactDOM.findDOMNode(this.refs.body).value.trim();
-      if(!title) {
+      var data = ({body: body});
+      if(!body) {
         return;
       }
-      var data = ({body: body});
       $.ajax({
-         url: this.props.url,
+         url: "/api/blogs/" + blogId + "/comment",
          dataType: 'json',
          data: data,
          type: 'POST',
             success: function(data){
-               console.log("Comment posted! " + data.body)
+               console.log("Comment posted! " + data)
                document.location='/'
             }.bind(this),
             error: function(xhr, status, err){
@@ -89,22 +98,65 @@ var CommentForm = React.createClass({
             }.bind(this)
       })
       
-      ReactDOM.findDOMNode(this.refs.title);
+      ReactDOM.findDOMNode(this.refs.body).value = "";
   
    },
+
       render: function() {
         return (
                  <div>
                  <form>
                   <div className="form-group" >
-                        <label>Comment</label>
-                        <input type="text" className="form-control" ref="body" placeholder="Say something nice..."/>
+                        <label>Leave a Comment</label>
+                        <textarea type="text" className="form-control" ref="body" placeholder="Say something nice..."/>
                   </div>
-                  <button onClick={this.handleCommentSubbmit} type="submit" className="btn btn-default">SAY SOMETHING</button>
+                  <button onClick={this.handleCommentSubmit} type="submit" className="btn btn-default">Submit</button>
                  </form>
                  </div>
               );
       }
    });
+
+var HateButton = React.createClass({
+  
+  getInitialState: function(){
+    return{hated: false, counter: 0};
+  },
+  handleClick: function(event){
+    this.setState({hated: !this.state.hated});
+    this.setState({counter: this.state.counter + 1});
+  },
+
+  render: function() {
+    var text = this.state.hated ? 'hate' : 'haven\'t hated';
+    var count = this.state.counter;
+    return (
+      <div className="row">
+      <button onClick={this.handleClick} className="btn glyphicon glyphicon-thumbs-down">  {count}</button>
+      </div>
+    );
+  }
+});
+
+var LoveButton = React.createClass({
+  
+  getInitialState: function(){
+    return{loved: false, counter: 0};
+  },
+  handleClick: function(event){
+    this.setState({hated: !this.state.loved});
+    this.setState({counter: this.state.counter + 1});
+  },
+
+  render: function() {
+    var text = this.state.loved ? 'hate' : 'haven\'t loved';
+    var count = this.state.counter;
+    return (
+      <div className="row">
+      <button onClick={this.handleClick} className="btn glyphicon glyphicon-thumbs-up">   {count}</button>
+      </div>
+    );
+  }
+});
 
 module.exports = BlogBox;

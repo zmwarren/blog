@@ -8,12 +8,11 @@ var Github = React.createClass({
         var commitInfo = git.coms.map(function(c){
           return(
             <p>{c.message}</p>
-            // <p>{c.url}</p>
           )
         });
       }
 		return(
-			<div className = "col-md-3">
+			<div className = "blog" key={git.id}>
 				<div className="panel panel-default box">
 						<h3 className="panel-header">Code Zone</h3>
 						<div className="panel-body">
@@ -30,7 +29,7 @@ var Github = React.createClass({
          <div>
             {gitData}
          </div>
-     	);
+    );
 	}
 });
 
@@ -44,7 +43,6 @@ var GitBox = React.createClass({
         dataType: 'json',
         cache: false,
         success: function(data) {
-          // console.log(data);
           this.setState({data: data});
         }.bind(this),
         error: function(xhr, status, err) {
@@ -63,6 +61,6 @@ var GitBox = React.createClass({
   }
 });
 
-// ReactDOM.render(<GitBox url="/api/github/"/>, document.getElementById('Github'));
+
 
 module.exports = GitBox;
