@@ -102,7 +102,7 @@ router.route('/')
  .post(function(req,res){
    mongoose.model('Comment').create({
      body: req.body.body,
-     user: req.user
+     user: req.body.user
    }, function(err, comment){
      if(err)
        res.send(err)
