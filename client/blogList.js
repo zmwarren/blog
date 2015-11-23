@@ -22,10 +22,7 @@ var BlogList = React.createClass({
               <h2 className="title banner" id="something">{blog.title}</h2>
               <h3 className="title">By {blog.author} &middot; {blog.date}</h3>
               <p className="para"> {blog.body}</p>
-              <div className="">                            
-                  <HateButton/>                                
-                  <LoveButton/>        
-              </div>
+             
               <CommentForm blogId={blog._id}/>
               <h2 className="title">Comments</h2>
               {commentData}
@@ -104,16 +101,13 @@ var CommentForm = React.createClass({
 
       render: function() {
         return (
-                 <div>
-                 
-                 
-                        <h3>Leave a Commment</h3>
-                        <textarea type="text" className="form-control" ref="body" placeholder="Say something nice..."/>
-                  
-                  <button onClick={this.handleCommentSubmit} type="submit" className="btn btn-default">Submit</button>
-                 
-                 </div>
-              );
+          <div>
+              <h3>Leave a Commment</h3>
+              <textarea type="text" className="form-control" ref="body" placeholder="Say something nice..."/>
+           <button onClick={this.handleCommentSubmit} type="submit" className="btn btn-default">Submit</button>
+          
+          </div>
+        );
       }
    });
 
