@@ -16,6 +16,7 @@ var comment = require('./model/comment');
 var Blog = require('./model/blog');
 var app = express();
 var mongoose = require('mongoose');
+var prettydate = require('pretty-date');
 
 
 

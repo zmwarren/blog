@@ -1,18 +1,22 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var prettydate = require('pretty-date');
 
 
 
 var BlogList = React.createClass({
    render: function() {
+      var self = this;
       var blogData = this.props.data.map(function(blog){
         var commentData = blog.comments.map(function(comment){
+          var newDate = prettydate.format(new Date(comment.date));
+          console.log(comment.user.local.userName);
                  return(
                  <div className="para" key={comment._id}>    
-                     <div className="comment panel panel-default box">
-                        <h4 className="panel-header">{comment._id} said...</h4>
+                     <div className="comment panel panel-default box">                
+                        <h4 className="panel-header">{comment.user.local.userName} said...</h4>
                         <p className="panel-body">{comment.body}</p>
-                        <h5 className="panel-footer">Posted on {comment.date}</h5>
+                        <h5 className="panel-footer">Posted on {newDate}</h5>
                      </div>
                   </div>
                 );
@@ -23,7 +27,7 @@ var BlogList = React.createClass({
               <h3 className="title">By {blog.author} &middot; {blog.date}</h3>
               <p className="para"> {blog.body}</p>
              
-              <CommentForm blogId={blog._id}/>
+              <CommentForm blogId={blog._id} onPost={self.props.newData}/>
               <h2 className="title">Comments</h2>
               {commentData}
             </div>
@@ -61,10 +65,17 @@ var BlogBox = React.createClass({
   componentDidMount: function(){
     this.loadBlogsFromServer();
   },
-  
+
   render: function() {
+
+    var self = this;
+
+    var doRefresh = function(){
+    self.loadBlogsFromServer();
+    };
+
     return (
-      <BlogList data={this.state.data}/>
+      <BlogList data={this.state.data} newData={doRefresh}/>
     );
   }
 });
@@ -86,8 +97,11 @@ var CommentForm = React.createClass({
          data: data,
          type: 'POST',
             success: function(data){
-               console.log("Comment posted! " + data)
-               document.location='/'
+            if(this.props.onPost){
+             this.props.onPost();
+            }
+            // console.log("Comment posted! " + data)
+            // document.location='/'
             }.bind(this),
             error: function(xhr, status, err){
                console.log("Didn't comment!");

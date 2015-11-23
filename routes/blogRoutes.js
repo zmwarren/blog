@@ -23,7 +23,7 @@ router.route('/')
   .get(function(req, res) {
 
     mongoose.model('Blog').find({})
-      .populate('comments')
+      .populate({ path: 'comments', populate:{path: 'user', select: 'local.email local.userName'}})
       .exec(function(err, blog){
       if(err){
         return console.log(err);
@@ -120,7 +120,9 @@ router.route('/:id/comments')
 
 .get(function(req, res){
   mongoose.model('Blog').findById({_id: req.params.id})
-  .populate('comments').exec(function(err, comments){
+  .populate('comments')
+  .populate('user')
+  .exec(function(err, comments){
     if(err)
       res.send(err)
     res.send(comments)

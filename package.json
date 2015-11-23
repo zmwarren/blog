@@ -56,6 +56,7 @@
     "morgan": "^1.6.1",
     "passport": "^0.3.0",
     "passport-local": "^1.0.0",
+    "pretty-date": "^0.2.0",
     "react": "^0.14.2",
     "react-dom": "^0.14.3"
   },
