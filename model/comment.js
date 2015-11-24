@@ -5,6 +5,8 @@ var commentSchema = new mongoose.Schema({
 	user: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
 	date: { type: Date, default: Date.now },
 	blog: { type: mongoose.Schema.Types.ObjectId, ref: 'Blog'},
+	agrees: Number,
+	disagrees: Number
 });
 
 module.exports = mongoose.model('Comment', commentSchema);

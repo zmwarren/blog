@@ -1,3 +1,12 @@
+.links {
+    text-decoration: none;
+    color: white;
+}
+
+.links:hover {
+    text-decoration: none;
+    color: white;
+}
 .zachary {
     height: 70px;
     font-family: 'Arial Black', 'Arial Bold', Gadget, sans-serif;
@@ -29,10 +38,6 @@ ul {
     background-color: gray;
 }
 
-a {
-	text-decoration: none;
-	color: red;
-}
 
 
 
@@ -154,10 +159,12 @@ button {
 }
 .banner {
     
-    border: 2px solid;
+    /*border: 2px solid;*/
     /*border-radius: 25px;*/
-    background-color: gray;
+    /*background-color: gray;*/
     text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: xx-large;
     
 }
 .para{
@@ -184,4 +191,26 @@ button {
 
 #signup {
     margin-left: 20px;
+}
+.comment {
+    width: 400px;
+    text-align: center;
+    -webkit-box-shadow: -9px 6px 25px 6px rgba(77,70,77,0.66);
+    -moz-box-shadow: -9px 6px 25px 6px rgba(77,70,77,0.66);
+    box-shadow: -9px 6px 25px 6px rgba(77,70,77,0.66);
+    padding-bottom: 40px;
+    padding-top: 10px;
+    padding-left: 10px;
+    border: solid;
+    border-size: 2px;
+    border-color: black;
+    margin: auto; 
+
+}
+.gravatar {
+    float: left;
+}
+
+.commentName {
+    float: left;
 }

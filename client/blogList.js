@@ -1,22 +1,26 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var prettydate = require('pretty-date');
+var md5 = require('md5');
 
 
 
 var BlogList = React.createClass({
    render: function() {
       var self = this;
-      var blogData = this.props.data.map(function(blog){
+      var blogData = this.props.data.map(function(blog){      
         var commentData = blog.comments.map(function(comment){
+          var grav = "http://www.gravatar.com/avatar/" + md5(comment.user.local.email);
           var newDate = prettydate.format(new Date(comment.date));
-          console.log(comment.user.local.userName);
                  return(
                  <div className="para" key={comment._id}>    
-                     <div className="comment panel panel-default box">                
-                        <h4 className="panel-header">{comment.user.local.userName} said...</h4>
-                        <p className="panel-body">{comment.body}</p>
-                        <h5 className="panel-footer">Posted on {newDate}</h5>
+                     <div className="comment">                
+                        <figure className="commentName">
+                          <img className="gravatar" src={grav} />
+                          <figcaption>{comment.user.local.userName}</figcaption>
+                        </figure>
+                        <p className="">{comment.body}</p>
+                        <p className="commentTime">{newDate}</p>
                      </div>
                   </div>
                 );
@@ -24,7 +28,8 @@ var BlogList = React.createClass({
         return (
             <div className="blog" key={blog._id}>
               <h2 className="title banner" id="something">{blog.title}</h2>
-              <h3 className="title">By {blog.author} &middot; {blog.date}</h3>
+              <p className="title">By {blog.author} &middot; {blog.date}</p>
+              <img className="blogImage" src={blog.img} height="200px" width="600px" />
               <p className="para"> {blog.body}</p>
              
               <CommentForm blogId={blog._id} onPost={self.props.newData}/>
@@ -117,7 +122,7 @@ var CommentForm = React.createClass({
         return (
           <div>
               <h3>Leave a Commment</h3>
-              <textarea type="text" className="form-control" ref="body" placeholder="Say something nice..."/>
+              <textarea type="text" className="form" ref="body" placeholder="Say something nice..."/>
            <button onClick={this.handleCommentSubmit} type="submit" className="btn btn-default">Submit</button>
           
           </div>
@@ -125,46 +130,5 @@ var CommentForm = React.createClass({
       }
    });
 
-var HateButton = React.createClass({
-  
-  getInitialState: function(){
-    return{hated: false, counter: 0};
-  },
-  handleClick: function(event){
-    this.setState({hated: !this.state.hated});
-    this.setState({counter: this.state.counter + 1});
-  },
-
-  render: function() {
-    var text = this.state.hated ? 'hate' : 'haven\'t hated';
-    var count = this.state.counter;
-    return (
-      <div className="row">
-      <button onClick={this.handleClick} className="btn glyphicon glyphicon-thumbs-down"> {count}</button>
-      </div>
-    );
-  }
-});
-
-var LoveButton = React.createClass({
-  
-  getInitialState: function(){
-    return{loved: false, counter: 0};
-  },
-  handleClick: function(event){
-    this.setState({hated: !this.state.loved});
-    this.setState({counter: this.state.counter + 1});
-  },
-
-  render: function() {
-    var text = this.state.loved ? 'hate' : 'haven\'t loved';
-    var count = this.state.counter;
-    return (
-      <div className="row">
-      <button onClick={this.handleClick} className="btn glyphicon glyphicon-thumbs-up"> {count}</button>
-      </div>
-    );
-  }
-});
 
 module.exports = BlogBox;
